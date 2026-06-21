@@ -1,1 +1,91 @@
-<p>dashboard works!</p>
+<div class="mb-4">
+  <h1 class="page-title">¡Bienvenido de nuevo, Victor! 👋</h1>
+  <p class="muted mb-0">Aquí tienes un resumen de tu gestión en Maskoteka.</p>
+</div>
+<div class="row g-4 mb-4">
+  <div class="col-md-3">
+    <div class="card-soft stat-card">
+      <div class="d-flex justify-content-between">
+        <div>
+          <p class="muted mb-2">Total mascotas</p>
+          <div class="stat-value">{{ data.pets.length }}</div>
+          <span class="text-success small fw-bold">+ 2 este mes</span>
+        </div>
+        <div class="stat-icon">🐾</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card-soft stat-card">
+      <div class="d-flex justify-content-between">
+        <div>
+          <p class="muted mb-2">Citas hoy</p>
+          <div class="stat-value">2</div>
+          <span class="text-danger small fw-bold">Próxima 10:00 am</span>
+        </div>
+        <div class="stat-icon">📅</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card-soft stat-card">
+      <div class="d-flex justify-content-between">
+        <div>
+          <p class="muted mb-2">Citas pendientes</p>
+          <div class="stat-value">5</div>
+          <span class="text-warning small fw-bold">Para esta semana</span>
+        </div>
+        <div class="stat-icon">🗓</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card-soft stat-card">
+      <div class="d-flex justify-content-between">
+        <div>
+          <p class="muted mb-2">Historial</p>
+          <div class="stat-value">12</div>
+          <span class="text-success small fw-bold">Completadas</span>
+        </div>
+        <div class="stat-icon">✅</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row g-4">
+  <div class="col-lg-8">
+    <div class="card-soft p-4">
+      <div class="d-flex justify-content-between mb-3">
+        <h5 class="fw-bold">Próximas citas</h5>
+        <a class="small-link" routerLink="/citas">Ver todas las citas →</a>
+      </div>
+      <div class="list-group list-group-flush">
+        <div
+          class="list-group-item d-flex align-items-center gap-3"
+          *ngFor="let c of data.getAppointments().slice(0, 3)"
+        >
+          <span class="avatar">🐶</span>
+          <div class="me-auto">
+            <b>{{ c.pet }}</b>
+            <div class="small muted">{{ c.service }}</div>
+            <div class="small text-muted mt-1">{{ c.date }} • {{ c.hour }}</div>
+          </div>
+          <span
+            class="badge-soft"
+            [class.badge-success]="c.status === 'Hoy'"
+            [class.badge-warning]="c.status === 'Mañana'"
+            >{{ c.status }}</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card-soft p-4 h-100">
+      <h5 class="fw-bold">Cuida su bienestar</h5>
+      <p class="muted">Agenda revisiones periódicas y mantén a tu mascota saludable.</p>
+      <a class="btn btn-primary" routerLink="/agendar">Agendar cita</a>
+      <div class="pet-hero fs-1 mt-4">🐶</div>
+    </div>
+  </div>
+</div>

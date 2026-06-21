@@ -1,9 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { DataService } from '../../core/data.service';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, RouterLink],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
-export class Dashboard {}
+export class Dashboard {
+  constructor(public data: DataService) {}
+}
