@@ -1,0 +1,14 @@
+<div class="card-soft p-5 text-center" style="max-width: 720px; margin: auto">
+  <div class="success-icon">✓</div>
+  <h1 class="fw-bold mt-4">¡Pago exitoso!</h1>
+  <p class="muted fs-5">Tu cita ha sido confirmada exitosamente.</p>
+  <div class="alert alert-success d-inline-flex align-items-center gap-3 px-4">
+    <span>📅</span>
+    <div>
+      <b>{{ data.reservation.service || 'service'}} · {{ data.reservation.pet?.name || 'name' }}</b
+      ><br /><span>{{ data.reservation.date || 'date'}} · {{ data.reservation.hour || 'hour'}}</span>
+    </div>
+  </div>
+  <div class="mt-4"><a routerLink="/citas" class="btn btn-primary px-5">Ver mi cita</a></div>
+  <a routerLink="/dashboard" class="small-link d-inline-block mt-3">Ir al inicio</a>
+</div>
