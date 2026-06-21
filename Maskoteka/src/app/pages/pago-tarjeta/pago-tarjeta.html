@@ -1,0 +1,58 @@
+<div class="row g-4">
+  <div class="col-lg-4">
+    <div class="card-soft p-4">
+      <h5 class="fw-bold">Resumen de la cita</h5>
+      <div class="summary-item my-3">
+        <span class="avatar">{{ data.reservation.pet?.emoji || '🐾' }}</span>
+        <div>
+          <b>{{ data.reservation.pet?.name || 'name' }}</b>
+          <div class="small muted">
+            {{ data.reservation.pet?.species || 'species' }} ·
+            {{ data.reservation.pet?.breed || 'breed' }}
+          </div>
+        </div>
+      </div>
+      <p>🏥 {{ data.reservation.service }}</p>
+      <p>📅 {{ data.reservation.date }}</p>
+      <hr />
+      <h4 class="fw-bold">S/ {{ data.reservation.total }}.00</h4>
+    </div>
+  </div>
+  <div class="col-lg-8">
+    <form class="card-soft p-4 payment-card" (ngSubmit)="pagar()">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h2 class="fw-bold">Pago con tarjeta</h2>
+          <p class="muted">Ingresa los datos de tu tarjeta para confirmar la reserva.</p>
+        </div>
+        <span class="price-pill">💳 PEN{{ data.reservation.total }}</span>
+      </div>
+      <label class="label mt-3">Número de tarjeta</label
+      ><input
+        class="form-control"
+        name="card"
+        [(ngModel)]="card"
+        placeholder="•••• •••• •••• ••••"
+      /><label class="label mt-3">Nombre en la tarjeta</label
+      ><input class="form-control" name="name" [(ngModel)]="name" />
+      <div class="row g-3 mt-1">
+        <div class="col-md-6">
+          <label class="label">Fecha de vencimiento</label
+          ><input class="form-control" name="exp" [(ngModel)]="exp" placeholder="MM / AA" />
+        </div>
+        <div class="col-md-6">
+          <label class="label">CCV</label
+          ><input class="form-control" name="cvv" [(ngModel)]="cvv" placeholder="•••" />
+        </div>
+      </div>
+      @if (submitted && (!card || !name || !exp || !cvv)) {
+        <div class="invalid-msg">Completa todos los datos de la tarjeta.</div>
+      }
+      <div class="d-flex justify-content-end gap-3 mt-4">
+        <a routerLink="/resumen-cita" class="btn btn-outline-secondary mr-1">Cancelar</a>
+        <button class="btn btn-primary">Pagar PEN{{ data.reservation.total }}</button>
+      </div>
+      <p class="muted small mt-3">🔒 Conexión segura</p>
+    </form>
+  </div>
+</div>
