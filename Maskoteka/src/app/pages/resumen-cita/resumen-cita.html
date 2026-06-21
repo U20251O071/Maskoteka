@@ -1,0 +1,54 @@
+<div class="row g-4">
+  <div class="col-lg-7">
+    <div class="card-soft p-4">
+      <h1 class="page-title">Resumen de la reserva</h1>
+      <p class="muted">Revisa los datos antes de pagar.</p>
+      <div class="summary-item my-3">
+        <span class="avatar">{{ data.reservation.pet?.emoji || '🐾' }}</span>
+        <div class="me-auto">
+          <div class="muted small">Mascota</div>
+          <b>{{ data.reservation.pet?.name || 'name' }}</b>
+        </div>
+        <span class="badge-soft badge-info"
+          >{{ data.reservation.pet?.species || 'species' }} ·
+          {{ data.reservation.pet?.breed || 'breed' }}</span
+        >
+      </div>
+      <div class="summary-item mb-3">
+        <span class="avatar">🏥</span>
+        <div>
+          <div class="muted small">Especialidad</div>
+          <b>{{ data.reservation.service }} </b>
+        </div>
+      </div>
+      <div class="summary-item mb-3">
+        <span class="avatar">📅</span>
+        <div>
+          <div class="muted small">Fecha</div>
+          <b>{{ data.reservation.date}}</b>
+        </div>
+      </div>
+      <div class="summary-item">
+        <span class="avatar">🕘</span>
+        <div>
+          <div class="muted small">Hora</div>
+          <b>{{ data.reservation.hour }}</b>
+        </div>
+      </div>
+      <div class="alert alert-success mt-4">
+        ✅ Todo listo. Confirma la reserva para continuar con el pago.
+      </div>
+      <div class="d-flex gap-2">
+        <a routerLink="/agendar-calendario" class="btn btn-outline-secondary mr-1">Editar</a
+        ><a routerLink="/pago-tarjeta" class="btn btn-primary flex-fill">Confirmar y pagar</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-5">
+    <div class="card-soft p-4">
+      <h5 class="fw-bold">Total a pagar</h5>
+      <div class="display-6 fw-bold">S/ {{ data.reservation.total }}.00</div>
+      <p class="muted">Pago seguro con tarjeta de crédito o débito.</p>
+    </div>
+  </div>
+</div>
