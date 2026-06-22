@@ -3,6 +3,7 @@ import { Login } from './pages/login/login';
 import { Registro } from './pages/registro/registro';
 import { Dashboard } from './pages/dashboard/dashboard';
 import { Citas } from './pages/citas/citas';
+import { Mascotas } from './pages/mascotas/mascotas';
 import { Agendar } from './pages/agendar/agendar';
 import { AgendarCalendario } from './pages/agendar-calendario/agendar-calendario';
 import { ReservarCita } from './pages/reservar-cita/reservar-cita';
@@ -23,6 +24,7 @@ export const routes: Routes = [
     children: [
       { path: 'dashboard', component: Dashboard },
       { path: 'citas', component: Citas },
+      { path: 'mascotas', component: Mascotas },
       { path: 'agendar', component: Agendar },
       { path: 'agendar-calendario', component: AgendarCalendario },
       { path: 'reservar-cita', component: ReservarCita },
