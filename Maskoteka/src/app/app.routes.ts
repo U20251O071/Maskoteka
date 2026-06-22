@@ -10,6 +10,7 @@ import { ResumenCita } from './pages/resumen-cita/resumen-cita';
 import { PagoTarjeta } from './pages/pago-tarjeta/pago-tarjeta';
 import { PagoExitoso } from './pages/pago-exitoso/pago-exitoso';
 import { AuthenticatedLayout } from './core/authenticated-layout';
+import { Usuario } from './pages/usuario/usuario';
 
 
 export const routes: Routes = [
@@ -28,6 +29,7 @@ export const routes: Routes = [
       { path: 'resumen-cita', component: ResumenCita },
       { path: 'pago-tarjeta', component: PagoTarjeta },
       { path: 'pago-exitoso', component: PagoExitoso },
+      { path: 'usuario', component: Usuario },
     ],
   },
   { path: '**', redirectTo: 'login' },

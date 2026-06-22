@@ -1,0 +1,85 @@
+<div class="card-soft profile-header mb-4">
+  <span class="brand-mark fs-3">E</span>
+  <div class="me-auto">
+    <h1 class="page-title">Victor S.</h1>
+    <span class="badge-soft badge-success">✉ victor.saravia@gmail.com</span>
+    <span class="badge-soft badge-info">📅 Miembro desde Jun 01, 2025</span>
+  </div>
+</div>
+<div class="row g-4">
+  <div class="col-lg-6">
+    <div class="card-soft p-4 h-100">
+      <div class="d-flex justify-content-between">
+        <h4 class="fw-bold">Información personal</h4>
+        <button class="btn btn-outline-secondary" (click)="editing = !editing">
+          ✎ {{ editing ? 'Cancelar' : 'Editar' }}
+        </button>
+      </div>
+      <div *ngIf="!editing" class="mt-4">
+        <dl class="info-list">
+          <dt>Nombre</dt>
+          <dd>{{ user.name }}</dd>
+          <dt>Correo electrónico</dt>
+          <dd>{{ user.email }}</dd>
+          <dt>Teléfono</dt>
+          <dd>{{ user.phone }}</dd>
+          <dt>Miembro desde</dt>
+          <dd>{{ user.since }}</dd>
+        </dl>
+      </div>
+      <form *ngIf="editing" class="mt-4">
+        <label class="label">Nombre</label
+        ><input class="form-control mb-3" name="name" [(ngModel)]="user.name" /><label class="label"
+          >Correo</label
+        ><input class="form-control mb-3" name="email" [(ngModel)]="user.email" /><label
+          class="label"
+          >Teléfono</label
+        ><input class="form-control mb-3" name="phone" [(ngModel)]="user.phone" /><button
+          type="button"
+          class="btn btn-primary"
+          (click)="editing = false; toast = 'Datos actualizados'"
+        >
+          Guardar cambios
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <form class="card-soft p-4" (ngSubmit)="update()">
+      <h4 class="fw-bold">Cambiar contraseña</h4>
+      <p class="muted">Actualiza la contraseña para mantener la cuenta segura.</p>
+      <label class="label">Contraseña actual *</label>
+      <div class="input-icon mb-3">
+        <input
+          type="password"
+          class="form-control"
+          name="current"
+          [(ngModel)]="current"
+          placeholder="Ingresa tu contraseña actual"
+        /><span>◉</span>
+      </div>
+      <label class="label">Nueva contraseña *</label>
+      <div class="input-icon mb-3">
+        <input
+          type="password"
+          class="form-control"
+          name="next"
+          [(ngModel)]="next"
+          placeholder="Ingresa tu nueva contraseña"
+        /><span>◉</span>
+      </div>
+      <label class="label">Confirmar nueva contraseña *</label>
+      <div class="input-icon mb-4">
+        <input
+          type="password"
+          class="form-control"
+          name="confirm"
+          [(ngModel)]="confirm"
+          placeholder="Confirma tu nueva contraseña"
+        /><span>◉</span>
+      </div>
+      <button class="btn btn-primary w-100">Actualizar contraseña</button>
+    </form>
+  </div>
+</div>
+<div class="status-toast" *ngIf="toast">{{ toast }}</div>
