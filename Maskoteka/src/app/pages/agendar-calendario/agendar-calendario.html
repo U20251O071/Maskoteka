@@ -10,7 +10,7 @@
         <span class="avatar">{{ data.reservation.pet?.emoji || '🐾' }}</span>
         <div>
           <div class="muted small">Mascota</div>
-          <b>{{ data.reservation.pet?.name || 'Lily' }}</b>
+          <b>{{ data.reservation.pet?.name || 'name' }}</b>
         </div>
       </div>
       <div class="summary-item">
@@ -25,28 +25,34 @@
   <div class="col-lg-7">
     <div class="card-soft p-4">
       <div class="d-flex justify-content-between align-items-center mb-3">
-        <button class="btn btn-outline-secondary btn-sm">‹</button>
-        <h4 class="fw-bold mb-0">Noviembre 2025</h4>
-        <button class="btn btn-outline-secondary btn-sm">›</button>
+        <button class="btn btn-outline-secondary btn-sm" (click)="prevMonth()">‹</button>
+        <h4 class="fw-bold mb-0">{{ monthLabel }}</h4>
+        <button class="btn btn-outline-secondary btn-sm" (click)="nextMonth()">›</button>
       </div>
       <div class="calendar mb-3">
-        <div
-          class="text-center fw-bold"
-          *ngFor="let d of ['DOM', 'LUN', 'MAR', 'MIE', 'JUE', 'VIE', 'SAB']"
-        >
-          {{ d }}
-        </div>
-        <button
-          class="day"
-          *ngFor="let d of days"
-          [class.off]="d < 1 || d > 31"
-          [class.busy]="busy.includes(d)"
-          [class.selected]="d === selected"
-          (click)="selectDay(d)"
-        >
-          {{ d }}
-        </button>
+        @for (d of ['DOM', 'LUN', 'MAR', 'MIE', 'JUE', 'VIE', 'SAB']; track d) {
+          <div class="text-center fw-bold">
+            {{ d }}
+          </div>
+        }
+        @for (d of days; track $index) {
+          <button
+            class="day"
+            [class.off]="!d.current"
+            [class.busy]="d.current && busy.includes(d.day)"
+            [class.selected]="d.current && d.day === selected"
+            [disabled]="d.current && busy.includes(d.day)"
+            (click)="selectDay(d)"
+          >
+            {{ d.day }}
+          </button>
+        }
       </div>
+      @if (isSelectedBusy) {
+        <div class="text-danger small mt-2">
+          El día seleccionado está ocupado; no puedes elegir horarios ni continuar.
+        </div>
+      }
       <div class="d-flex gap-3 small">
         <span class="text-success">● Disponible</span><span class="text-danger">● Sin turnos</span
         ><span class="text-primary">● Seleccionado</span>
@@ -54,16 +60,20 @@
       <hr />
       <h6 class="fw-bold">Horarios disponibles</h6>
       <div class="d-flex gap-2 flex-wrap">
-        <button
-          class="slot"
-          *ngFor="let s of slots"
-          [class.active]="hour.startsWith(s)"
-          (click)="selectSlot(s)"
-        >
-          {{ s }}
-        </button>
+        @for (s of slots; track s) {
+          <button
+            class="slot"
+            [class.active]="hour.startsWith(s)"
+            [disabled]="slotsDisabled"
+            (click)="selectSlot(s)"
+          >
+            {{ s }}
+          </button>
+        }
       </div>
-      <button class="btn btn-primary w-100 mt-4" (click)="next()">Siguiente</button>
+      <button class="btn btn-primary w-100 mt-4" [disabled]="!canContinue" (click)="next()">
+        Siguiente
+      </button>
     </div>
   </div>
 </div>
