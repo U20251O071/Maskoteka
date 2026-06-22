@@ -1,0 +1,22 @@
+<div class="container-fluid auth-page d-flex align-items-center justify-content-center p-4">
+  <div class="auth-card row g-0 w-100" style="max-width:1050px">
+    <div class="col-lg-6 auth-form">
+      <a routerLink="/login" class="small-link d-inline-block mb-4">← Inicio</a>
+      <span class="small-link d-block">🐾 Crea tu cuenta</span>
+      <h1 class="fw-bold mt-2">Únete a Maskoteka</h1>
+      <p class="muted mb-4">Completa tus datos para comenzar.</p>
+      <form (ngSubmit)="registrar()" novalidate>
+        <div class="row g-3"><div class="col-md-6"><label class="label">Nombre(s)</label><input class="form-control" name="nombre" [(ngModel)]="nombre" placeholder="Ingresa tus nombres"></div><div class="col-md-6"><label class="label">Apellidos</label><input class="form-control" name="apellidos" [(ngModel)]="apellidos" placeholder="Ingresa tus apellidos"></div></div>
+        <div class="invalid-msg" *ngIf="submitted && (!nombre || !apellidos)">Completa nombres y apellidos.</div>
+        <div class="my-3"><label class="label">Correo electrónico</label><input class="form-control" name="email" [(ngModel)]="email" type="email" placeholder="ejemplo@correo.com"></div>
+        <div class="mb-2"><label class="label">Contraseña</label><div class="input-icon"><input class="form-control" name="password" [(ngModel)]="password" type="password" placeholder="Crea una contraseña"><span>◉</span></div></div>
+        <div class="small muted mb-3">La contraseña debe contener:<br>✅ Al menos 8 caracteres<br>✅ Una mayúscula y una minúscula<br>✅ Un número o símbolo</div>
+        <div class="form-check mb-3"><input class="form-check-input" type="checkbox" id="terms" name="acepta" [(ngModel)]="acepta"><label class="form-check-label" for="terms">Acepto los <b class="text-primary">términos y condiciones</b> y las <b class="text-primary">políticas de privacidad</b></label></div>
+        <div class="invalid-msg mb-3" *ngIf="submitted && (!email || !password || !acepta)">Completa correo, contraseña y acepta los términos.</div>
+        <button class="btn btn-primary w-100" type="submit">♧ Crear cuenta</button>
+      </form>
+      <p class="text-center muted mt-4">¿Ya tienes una cuenta? <a routerLink="/login" class="small-link">Inicia sesión</a></p>
+    </div>
+    <div class="col-lg-6 auth-visual"><div><span class="brand-mark fs-3">M</span><h2 class="fw-bold mt-3">Maskoteka</h2><p>Cuidado y bienestar<br>para tu mejor amigo</p><div class="pet-hero">🐩</div></div></div>
+  </div>
+</div>
