@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { Login } from './pages/login/login';
+import { Registro } from './pages/registro/registro';
 import { Dashboard } from './pages/dashboard/dashboard';
 import { Agendar } from './pages/agendar/agendar';
 import { AgendarCalendario } from './pages/agendar-calendario/agendar-calendario';
@@ -10,9 +11,11 @@ import { PagoTarjeta } from './pages/pago-tarjeta/pago-tarjeta';
 import { PagoExitoso } from './pages/pago-exitoso/pago-exitoso';
 import { AuthenticatedLayout } from './core/authenticated-layout';
 
+
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: Login },
+  { path: 'registro', component: Registro },
   {
     path: '',
     component: AuthenticatedLayout,
