@@ -1,0 +1,49 @@
+<div class="row g-4 align-items-start">
+  <div class="col-lg-7">
+    <div class="card-soft p-4">
+      <h3 class="fw-bold">Reservar cita</h3>
+      <p class="muted">Confirma los detalles de tu reserva y elige un turno.</p>
+      <div class="summary-item my-3">
+        <span class="avatar">{{ data.reservation.pet?.emoji || '🐶' }}</span>
+        <div>
+          <b>{{ data.reservation.pet?.name || 'Lily' }}</b>
+          <div class="small muted">
+            {{ data.reservation.pet?.species || 'Perro' }} ·
+            {{ data.reservation.pet?.breed || 'Pug' }}
+          </div>
+        </div>
+      </div>
+      <div class="summary-item mb-3">
+        <span class="avatar">🏥</span>
+        <div>
+          <div class="small muted">Especialidad</div>
+          <b>{{ data.reservation.service }}</b>
+        </div>
+      </div>
+      <div class="summary-item mb-3">
+        <span class="avatar">📅</span>
+        <div>
+          <div class="small muted">Fecha</div>
+          <b>{{ data.reservation.date }}</b>
+        </div>
+      </div>
+      <h6 class="fw-bold mt-4">Turnos disponibles</h6>
+      <div class="d-flex gap-2 flex-wrap">
+        <button class="slot" *ngFor="let s of slots" [class.active]="s === hour" (click)="hour = s">
+          {{ s }}
+        </button>
+      </div>
+      <div class="d-flex justify-content-end gap-2 mt-4">
+        <a routerLink="/agendar-calendario" class="btn btn-outline-secondary">Cancelar</a
+        ><button class="btn btn-primary" (click)="confirmar()">Confirmar reserva</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-5">
+    <div class="card-soft p-4 text-center">
+      <div class="fs-1">🐾</div>
+      <h5 class="fw-bold">Tu cita está casi lista</h5>
+      <p class="muted">Luego de confirmar podrás revisar el resumen y completar el pago.</p>
+    </div>
+  </div>
+</div>
