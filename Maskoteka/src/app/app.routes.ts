@@ -3,9 +3,10 @@ import { Dashboard } from './pages/dashboard/dashboard';
 import { ResumenCita } from './pages/resumen-cita/resumen-cita';
 import { PagoTarjeta } from './pages/pago-tarjeta/pago-tarjeta';
 import { PagoExitoso } from './pages/pago-exitoso/pago-exitoso';
-import { AgendarCalendario } from './pages/agendar-calendario/agendar-calendario';
-import { AuthenticatedLayout } from './core/authenticated-layout';
 import { Agendar } from './pages/agendar/agendar';
+import { AgendarCalendario } from './pages/agendar-calendario/agendar-calendario';
+import { ReservarCita } from './pages/reservar-cita/reservar-cita';
+import { AuthenticatedLayout } from './core/authenticated-layout';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -19,7 +20,8 @@ export const routes: Routes = [
       { path: 'resumen-cita', component: ResumenCita },
       { path: 'agendar', component: Agendar },
       { path: 'agendar-calendario', component: AgendarCalendario },
-    ],
+      { path: 'reservar-cita', component: ReservarCita },
+    ]
   },
   { path: '**', redirectTo: 'login' },
 ];
