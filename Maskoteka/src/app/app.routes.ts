@@ -5,6 +5,7 @@ import { PagoTarjeta } from './pages/pago-tarjeta/pago-tarjeta';
 import { PagoExitoso } from './pages/pago-exitoso/pago-exitoso';
 import { Agendar } from './pages/agendar/agendar';
 import { AgendarCalendario } from './pages/agendar-calendario/agendar-calendario';
+import { CitaConfirmada } from './pages/cita-confirmada/cita-confirmada';
 import { ReservarCita } from './pages/reservar-cita/reservar-cita';
 import { AuthenticatedLayout } from './core/authenticated-layout';
 
@@ -21,6 +22,7 @@ export const routes: Routes = [
       { path: 'agendar', component: Agendar },
       { path: 'agendar-calendario', component: AgendarCalendario },
       { path: 'reservar-cita', component: ReservarCita },
+      { path: 'cita-confirmada', component: CitaConfirmada },
     ]
   },
   { path: '**', redirectTo: 'login' },

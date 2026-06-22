@@ -1,0 +1,35 @@
+<div class="modal-static text-center">
+  <div class="success-icon">✓</div>
+  <h1 class="fw-bold mt-4">Turno seleccionado</h1>
+  <p class="muted">Proceda al pago para agendar su cita.</p>
+  <a routerLink="/resumen-cita" class="btn btn-primary px-5 mt-3">OK</a>
+</div>
+<div class="card-soft p-4 mt-4">
+  <h5 class="fw-bold">Resumen de la reserva</h5>
+  <div class="row g-3 mt-2">
+    <div class="col-md-4">
+      <div class="summary-item">
+        <span class="avatar">{{ data.reservation.pet?.emoji || '🐾' }}</span>
+        <div>
+          <small class="muted">Mascota</small><br /><b>{{
+            data.reservation.pet?.name || 'Luna'
+          }}</b>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="summary-item">
+        <span class="avatar">🏥</span>
+        <div>
+          <small class="muted">Especialidad</small><br /><b>{{ data.reservation.service }}</b>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="summary-item">
+        <span class="avatar">📅</span>
+        <div><small class="muted">Fecha</small><br /><b>24-11-2025</b></div>
+      </div>
+    </div>
+  </div>
+</div>
