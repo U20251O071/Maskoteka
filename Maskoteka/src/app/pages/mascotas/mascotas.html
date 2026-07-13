@@ -51,9 +51,17 @@
         <input class="form-control" name="name" [(ngModel)]="draft.name" required>
       </div>
       <div class="col-md-6">
+        <label class="label">Fecha de nacimiento</label>
+        <input
+          type="date"
+          class="form-control"
+          name="birth"
+          [(ngModel)]="draft.birth">
+      </div>
+      <!-- <div class="col-md-6">
         <label class="label">Edad</label>
         <input class="form-control" name="age" [(ngModel)]="draft.age">
-      </div>
+      </div> -->
       <div class="col-md-6">
         <label class="label">Género</label>
         <select class="form-select" name="gender" [(ngModel)]="draft.gender">
@@ -63,16 +71,44 @@
       </div>
       <div class="col-md-6">
         <label class="label">Especie</label>
-        <input class="form-control" name="species" [(ngModel)]="draft.species">
+        <!-- <input class="form-control" name="species" [(ngModel)]="draft.species"> -->
+        <select class="form-select" name="gender" [(ngModel)]="draft.species">
+          @for (e of especies(); track e.idEspecie) {
+            <option value="{{e.idEspecie}}">{{e.nombre}}</option>
+          }
+        </select>
       </div>
       <div class="col-md-6">
         <label class="label">Raza</label>
         <input class="form-control" name="breed" [(ngModel)]="draft.breed">
       </div>
       <div class="col-md-6">
+        <label class="label">Peso (KG)</label>
+        <input class="form-control" name="weight" [(ngModel)]="draft.weight">
+      </div>
+      <div class="col-md-6">
+        <label class="label">Color</label>
+        <input class="form-control" name="color" [(ngModel)]="draft.color">
+      </div>
+      <div class="col-md-6">
+        <label class="label">Esterilizado</label>
+        <select class="form-select" name="sterilized" [(ngModel)]="draft.sterilized">
+          <option value="0">No</option>
+          <option value="1">Si</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label class="label">Michochip</label>
+        <input class="form-control" name="microchip" [(ngModel)]="draft.microchip">
+      </div>
+      <div class="col-md-6">
+        <label class="label">Observacion</label>
+        <input class="form-control" name="notes" [(ngModel)]="draft.notes">
+      </div>
+      <!-- <div class="col-md-6">
         <label class="label">Emoji</label>
         <input class="form-control" name="emoji" [(ngModel)]="draft.emoji">
-      </div>
+      </div> -->
     </div>
     <button class="btn btn-primary w-100 mt-4">Guardar</button>
   </form>
