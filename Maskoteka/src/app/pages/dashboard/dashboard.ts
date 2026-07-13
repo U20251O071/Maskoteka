@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { DataService } from '../../core/data.service';
+import { ProjectService } from '../../services/project-service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,5 +11,38 @@ import { DataService } from '../../core/data.service';
   styleUrl: './dashboard.css',
 })
 export class Dashboard {
-  constructor(public data: DataService) {}
+
+  resumen = signal<any>({
+    nombre:'usuario',
+    totalMascotas: 0,
+    citasProximas: 0,
+    citasCompletadas: 0,
+  });
+
+  proximasCitas = signal<any[]>([]);
+
+  constructor(
+    private readonly ps: ProjectService
+  ) {}
+
+  __obtener_dashboard(id: string) {
+    this.ps.obtener_dashboard(id).subscribe({
+      next: (rest: any) => {
+        this.resumen.set(rest.data.resumen);
+        this.proximasCitas.set(rest.data.proximasCitas);
+
+        console.log('Resumen dashboard:', rest.data.resumen);
+        console.log('Próximas citas:', rest.data.proximasCitas);
+      },
+      error: (error) => {
+        console.error('Error al consultar el dashboard:', error);
+      }
+    });
+  }
+
+  ngOnInit(): void {
+    const idUsuario =
+    localStorage.getItem('idUsuario') || '1';
+    this.__obtener_dashboard(idUsuario);
+  }
 }

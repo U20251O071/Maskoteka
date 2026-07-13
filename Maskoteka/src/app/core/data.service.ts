@@ -1,5 +1,20 @@
 import { Injectable } from '@angular/core';
 
+export interface MascotaApi {
+  idMascota: number;
+  nombre: string;
+  especie: string;
+  raza: string;
+  fotoUrl: string;
+  color: string;
+  esterilizado: string;
+  fechaNacimiento: string;
+  microchip: string;
+  observaciones: string;
+  sexo: string;
+}
+
+
 export interface Pet {
   id: number;
   name: string;
