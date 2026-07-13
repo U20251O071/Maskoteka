@@ -47,7 +47,9 @@ export class Agendar {
   }
 
   ngOnInit(): void {
-    this.__listar_mascotas_usuario('1');
+    const idUsuario =
+    localStorage.getItem('idUsuario') || '1';
+    this.__listar_mascotas_usuario(idUsuario);
     /* this.ar.params.subscribe((params: Params) => {
       this.__listar_mascotas_usuario(params['id']);
     }); */

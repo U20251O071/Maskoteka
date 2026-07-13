@@ -19,4 +19,14 @@ export class ProjectService {
       { responseType: 'json' }
     );
   }
+
+  login_usuario(data: { correo: string; clave: string }) {
+    return this.http.post(
+      'https://8hr2841ry8.execute-api.us-east-1.amazonaws.com/v1/usuario/login',
+      data,
+      {
+        responseType: 'json',
+      },
+    );
+  }
 }

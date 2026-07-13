@@ -13,6 +13,7 @@ import { ProjectService } from '../../services/project-service';
 export class Dashboard {
 
   resumen = signal<any>({
+    nombre:'usuario',
     totalMascotas: 0,
     citasProximas: 0,
     citasCompletadas: 0,
@@ -40,6 +41,8 @@ export class Dashboard {
   }
 
   ngOnInit(): void {
-    this.__obtener_dashboard('1');
+    const idUsuario =
+    localStorage.getItem('idUsuario') || '1';
+    this.__obtener_dashboard(idUsuario);
   }
 }
