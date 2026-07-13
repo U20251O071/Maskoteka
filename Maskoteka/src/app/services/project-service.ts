@@ -1,0 +1,15 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ProjectService {
+  constructor(
+    private http: HttpClient
+  ) {  }
+
+  listar_mascotas_usuario(param: string){
+    return this.http.get("https://36fl9rx247.execute-api.us-east-1.amazonaws.com/v1/listarmascotausuario?idUsuario=" + param, {responseType: 'json'});
+  }
+}

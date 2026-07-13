@@ -3,26 +3,24 @@
   <p class="muted">Paso 1 de 4: selecciona la mascota y el servicio.</p>
 </div>
 <div class="d-flex align-items-center gap-2 mb-4">
-  <span class="step active">1</span><span>Mascota</span><span class="step">2</span
-  ><span>Especialidad</span><span class="step">3</span><span>Fecha y hora</span
+  <span class="step active">1</span><span>Mascota</span><span class="step">2</span>
+  <span>Especialidad</span><span class="step">3</span><span>Fecha y hora</span
   ><span class="step">4</span><span>Confirmar</span>
 </div>
+
 <div class="row g-4">
   <div class="col-lg-6">
     <div class="card-soft p-4">
       <h5 class="fw-bold mb-3">Selecciona una mascota</h5>
-      <div
-        class="pet-option"
-        *ngFor="let p of data.getPets()"
-        [class.active]="selected?.id === p.id"
-        (click)="choose(p)"
-      >
-        <span class="avatar">{{ p.emoji }}</span>
+      <div class="pet-option" *ngFor="let p of mascotas()" [class.active]="selected?.idMascota === p.idMascota" (click)="choose(p)">
+        <span class="avatar">
+          <img src="{{ p.fotoUrl }}" alt="Avatar del usuario" class="avatar">
+        </span>
         <div class="me-auto">
-          <b>{{ p.name }}</b>
-          <div class="small muted">{{ p.species }} · {{ p.breed }}</div>
+          <b>{{ p.nombre }}</b>
+          <div class="small muted">{{ p.especie }} · {{ p.raza }}</div>
         </div>
-        <span *ngIf="selected?.id === p.id" class="text-primary fw-bold">✓</span>
+        <span *ngIf="selected?.idMascota === p.idMascota" class="text-primary fw-bold">✓</span>
       </div>
       <label class="label mt-3">Especialidad</label
       ><select class="form-select" [(ngModel)]="service">
