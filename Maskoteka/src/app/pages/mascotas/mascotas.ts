@@ -1,13 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { DataService, Pet } from '../../core/data.service';
+import { ProjectService } from '../../services/project-service';
+import { EdadPipe } from '../../core/pipes/edad-pipe';
 
 @Component({
   selector: 'app-mascotas',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, EdadPipe],
   templateUrl: './mascotas.html',
   styleUrl: './mascotas.css',
 })
@@ -16,7 +18,18 @@ export class Mascotas {
   editing?: Pet;
   toast = '';
   draft: any = {};
-  constructor(public data: DataService) {}
+  constructor(
+    public data: DataService,
+    private readonly ps: ProjectService,
+  ) {}
+
+  __obtener_detalle_mascota(idMascota: string, idUsuario: string){
+    this.ps.obtener_detalle_mascota({idMascota, idUsuario }).subscribe((rest: any) => {
+      this.mascotas.set(rest.data);
+      console.log('mascota:', rest.data);
+    });
+  }
+
   nuevo() {
     this.editing = undefined;
     this.draft = {
@@ -53,4 +66,22 @@ export class Mascotas {
     this.toast = 'Mascota eliminada';
     setTimeout(() => (this.toast = ''), 2000);
   }
+
+  mascotas = signal<any[]>([]);
+  __listar_mascotas_usuario(id: string){
+    this.ps.listar_mascotas_usuario(id).subscribe((rest: any) => {
+      this.mascotas.set(rest.data);
+      console.log('mascotas data:', rest.data);
+    });
+  }
+
+  ngOnInit(): void {
+    const idUsuario =
+    localStorage.getItem('idUsuario') || '1';
+    this.__listar_mascotas_usuario(idUsuario);
+    /* this.ar.params.subscribe((params: Params) => {
+      this.__listar_mascotas_usuario(params['id']);
+    }); */
+  }
+
 }

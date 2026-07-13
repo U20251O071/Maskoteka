@@ -40,9 +40,11 @@ export class Dashboard {
     });
   }
 
+  nombres = '';
   ngOnInit(): void {
     const idUsuario =
     localStorage.getItem('idUsuario') || '1';
+    this.nombres = localStorage.getItem('nombres') || 'Victor';
     this.__obtener_dashboard(idUsuario);
   }
 }
