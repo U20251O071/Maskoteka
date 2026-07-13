@@ -3,14 +3,12 @@ import pyodbc
 import hashlib
 
 def get_connection():
-    return pyodbc.connect(
+     return pyodbc.connect(
         "Driver={ODBC Driver 18 for SQL Server};"
-        "Server=TU-ENDPOINT-RDS;"
+        "Server=dbmaskoteka.cshlj5vyhbj0.us-east-1.rds.amazonaws.com;"
         "Database=BD_MASKOTEKA;"
         "UID=admin;"
-        "PWD=TU_CLAVE;"
-        "Encrypt=yes;"
-        "TrustServerCertificate=yes;"
+        "PWD=password"
     )
 
 
@@ -21,7 +19,6 @@ def lambda_handler(event, context):
     try:
         correo = event.get('correo')
         clave = event.get('clave')
-        claveHash = hashlib.sha256(clave.encode('utf-8')).hexdigest()
 
         cursor.execute(
             'EXEC dbo.usp_Usuario_Login @CORREO=?',
@@ -30,7 +27,7 @@ def lambda_handler(event, context):
 
         row = cursor.fetchone()
 
-        if row is None or row[4] != claveHash:
+        if row is None or row[4] != clave:
             return {
                 'isSuccess': False,
                 'errorCode': '401',

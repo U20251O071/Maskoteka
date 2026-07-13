@@ -4,12 +4,10 @@ import pyodbc
 def get_connection():
     return pyodbc.connect(
         "Driver={ODBC Driver 18 for SQL Server};"
-        "Server=TU-ENDPOINT-RDS;"
+        "Server=dbmaskoteka.cshlj5vyhbj0.us-east-1.rds.amazonaws.com;"
         "Database=BD_MASKOTEKA;"
         "UID=admin;"
-        "PWD=TU_CLAVE;"
-        "Encrypt=yes;"
-        "TrustServerCertificate=yes;"
+        "PWD=password"
     )
 
 
