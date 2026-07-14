@@ -7,7 +7,7 @@ def get_connection():
         "Server=dbmaskoteka.cshlj5vyhbj0.us-east-1.rds.amazonaws.com;"
         "Database=BD_MASKOTEKA;"
         "UID=admin;"
-        "PWD=password"
+        "PWD=26Jo$ue.,-CV1997."
     )
 
 

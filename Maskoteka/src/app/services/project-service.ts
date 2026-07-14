@@ -70,5 +70,25 @@ export class ProjectService {
     console.log("Enviando:", data)
     return this.http.post('https://36fl9rx247.execute-api.us-east-1.amazonaws.com/v1/mascota',data,{responseType: 'json'});
   }
+
+  editar_mascota(data: any) {
+    const imagenes: any = {
+      0: 'https://em-content.zobj.net/source/microsoft/378/dog-face_1f436.png', //perro
+      1: 'https://em-content.zobj.net/source/microsoft/378/cat-face_1f431.png', //gato
+      2: 'https://em-content.zobj.net/source/microsoft/378/hamster_1f439.png', // hamster  
+      3: 'https://em-content.zobj.net/source/microsoft/378/rabbit-face_1f430.png', //conejo
+      4: 'https://em-content.zobj.net/source/microsoft/378/bird_1f426.png',//pajaro
+      // pajaro: 'https://em-content.zobj.net/source/microsoft/378/bird_1f426.png', // pajaro2
+      5: 'https://em-content.zobj.net/source/microsoft/378/parrot_1f99c.png',//loro
+      6: 'https://em-content.zobj.net/source/microsoft/378/turtle_1f422.png', //tortuga
+    };
+ 
+    data.fotoUrl =
+    imagenes[data.idEspecie] ??
+    'https://em-content.zobj.net/source/microsoft/378/paw-prints_1f43e.png';
+  
+    return this.http.post('https://36fl9rx247.execute-api.us-east-1.amazonaws.com/v1/mascota/updmascota',data,{ responseType: 'json' });
+  
+  }
   
 }

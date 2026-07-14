@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { DataService, Pet } from '../../core/data.service';
+import { DataService, MascotaApi, Pet } from '../../core/data.service';
 import { ProjectService } from '../../services/project-service';
 import { EdadPipe } from '../../core/pipes/edad-pipe';
 
@@ -16,7 +16,7 @@ import { EdadPipe } from '../../core/pipes/edad-pipe';
 export class Mascotas {
   idUsuario: any;
   showForm = false;
-  editing?: Pet;
+  editing?: MascotaApi; //Pet
   toast = '';
   draft: any = {};
   
@@ -44,15 +44,32 @@ export class Mascotas {
       weight: '',
       color: '',
       birth: '',
-      sterilized: 'No',
+      sterilized: false,
       microchip: '',
       notes: '',
     };
     this.showForm = true;
   }
-  editar(p: Pet) {
+  editar(p: any) {
     this.editing = p;
-    this.draft = { ...p };
+    console.log(p)
+    this.draft = {
+      idMascota: p.idMascota,
+      name: p.nombre ?? '',
+      birth: p.fechaNacimiento 
+        ? p.fechaNacimiento.substring(0,10)
+        : '',
+      gender: p.sexo === 'M'
+        ? 'Macho'
+        : 'Hembra',
+      species: p.idEspecie,
+      breed: p.raza ?? '',
+      weight: p.pesoKg ?? '',
+      color: p.color ?? '',
+      sterilized: p.esterilizado,
+      microchip: p.microchip ?? '',
+      notes: p.observaciones ?? ''
+    };
     this.showForm = true;
   }
   /* guardar() {
@@ -78,6 +95,7 @@ export class Mascotas {
     }
   
     const mascota = {
+      idMascota: this.editing?.idMascota,
       nombre: this.draft.name,
       fechaNacimiento: this.draft.birth,
       sexo: this.draft.gender === 'Macho' ? 'M' : 'H',
@@ -88,9 +106,18 @@ export class Mascotas {
       esterilizado: this.draft.sterilized,
       microchip: this.draft.microchip,
       observaciones: this.draft.notes,
+      idUsuario: this.idUsuario
     };
   
-    this.__registar_mascota(mascota);
+    if (this.editing) {
+      console.log(mascota)
+      this.__editar_mascota(mascota);
+  
+    } else {
+  
+      this.__registar_mascota(mascota);
+  
+    }
   }
 
   eliminar(id: number) {
@@ -104,6 +131,31 @@ export class Mascotas {
     this.ps.listar_mascotas_usuario(id).subscribe((rest: any) => {
       this.mascotas.set(rest.data);
       console.log('mascotas data:', rest.data);
+    });
+  }
+
+  __editar_mascota(data: any){
+    this.ps.editar_mascota(data).subscribe({
+      next: (rest: any) => {
+        console.log(rest);
+        // Ajusta esta condición según la respuesta de tu API
+        if (rest.msg) {
+          this.showForm = false;  
+          this.toast = rest.msg || 'Mascota actualizada correctamente';
+          this.__listar_mascotas_usuario(this.idUsuario);
+          this.draft = {};
+          this.editing = undefined;
+        } else {
+          this.toast = rest.msg || 'No se pudo actualizar la mascota';
+        }
+        setTimeout(() => this.toast = '', 2500);
+      },
+  
+      error: (err) => {
+        console.error(err);
+        this.toast = 'Ocurrió un error al actualizar la mascota';
+        setTimeout(() => this.toast = '', 2500);
+      }
     });
   }
 

@@ -72,9 +72,9 @@
       <div class="col-md-6">
         <label class="label">Especie</label>
         <!-- <input class="form-control" name="species" [(ngModel)]="draft.species"> -->
-        <select class="form-select" name="gender" [(ngModel)]="draft.species">
+        <select class="form-select" name="species" [(ngModel)]="draft.species">
           @for (e of especies(); track e.idEspecie) {
-            <option value="{{e.idEspecie}}">{{e.nombre}}</option>
+            <option [ngValue]="e.idEspecie">{{e.nombre}}</option>
           }
         </select>
       </div>
@@ -93,8 +93,8 @@
       <div class="col-md-6">
         <label class="label">Esterilizado</label>
         <select class="form-select" name="sterilized" [(ngModel)]="draft.sterilized">
-          <option value="0">No</option>
-          <option value="1">Si</option>
+          <option [ngValue]="false">No</option>
+          <option [ngValue]="true">Si</option>
         </select>
       </div>
       <div class="col-md-6">
